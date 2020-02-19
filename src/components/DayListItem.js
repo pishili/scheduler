@@ -1,5 +1,5 @@
 import React from "react";
-import "./DayListItem.scss";
+import "styles/DayListItem.scss";
 
 var classNames = require('classnames');
 
@@ -22,10 +22,16 @@ export default function DayListItem(props) {
 			
 	return (
 	<li className={dayClass} onClick={() => props.setDay(props.name)}>
-	   <h2>{props.name}</h2>
-	   <h3>{formatSpots(props.spots)}</h3>
+	   <h2 >{props.name}</h2>
+	   <h3 className={dayClass}>{formatSpots(props.spots)}</h3>
     </li>
   );
 }
+
+
+
+
+
+
 
 
