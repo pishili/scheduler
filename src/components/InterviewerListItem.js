@@ -8,7 +8,7 @@ export default function InterviewListItem(props) {
     let className = classNames(
         ["interviewers__item",
             {
-                "interviewers__item--selected &-image": props.selected
+                "interviewers__item--selected": props.selected
             }
         ]
     );
@@ -21,7 +21,7 @@ export default function InterviewListItem(props) {
     return (
         <li className={className}>
             <img
-                className={className}
+                className="interviewers__item-image"
                 src={props.avatar}
                 alt={props.name}
             />
