@@ -7,10 +7,7 @@ var classNames = require('classnames');
 
 export default function InterviewerList(props) {
 
-    // let interviewsClass = classNames(["interviewers__list",
-    //                                 {"interviewers__header": props.Initial,
-    //                                 "interviewers__head": props.Preselected
-    //                                 }]);
+
 
     const interviewers = props.interviewers.map(interviewer => {
         return (
