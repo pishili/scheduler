@@ -5,10 +5,13 @@ import { storiesOf } from "@storybook/react";
 var classNames = require('classnames');
 
 export default function InterviewListItem(props) {
+
+    const { name, selected, avatar, setInterviewer } = props;
+
     let className = classNames(
         ["interviewers__item",
             {
-                "interviewers__item--selected": props.selected
+                "interviewers__item--selected": selected
             }
         ]
     );
@@ -16,27 +19,31 @@ export default function InterviewListItem(props) {
     let imgClass = classNames(
         ["interviewers__item-image",
             {
-                "interviewers__item--selected-image": props.selected
+                "interviewers__item--selected-image": selected
             }
         ]
     );
 
-    let name = "";
-    if (props.selected) {
-        name = props.name
+    let shownName = "";
+    if (selected) {
+        shownName = name
     }
 
     return (
-        <li className={className} onClick={() => props.setInterviewer(props.name)}> 
+        <li className={className} onClick={() => setInterviewer(name)}> 
             <img
                 className={imgClass}
-                src={props.avatar}
-                alt={props.name}
+                src={avatar}
+                alt={name}
             />
-            {name}
+            {shownName}
         </li>
     )
 }
+
+
+
+
 
 
 
