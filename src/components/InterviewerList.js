@@ -7,8 +7,6 @@ var classNames = require('classnames');
 
 export default function InterviewerList(props) {
 
-
-
     const interviewers = props.interviewers.map(interviewer => {
         return (
           <InterviewerListItem
@@ -30,7 +28,7 @@ export default function InterviewerList(props) {
         </section>
     );
 }
-
+  
 
 
 

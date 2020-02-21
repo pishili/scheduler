@@ -47,13 +47,10 @@ export default function Form(props) {
             </section>
             <section className="appointment__card-right">
                 <section className="appointment__actions">
-                <Button danger>Cancel</Button>
-                <Button confirm>Save</Button>
+                <Button onClick={cancel}>Cancel</Button>
+                <Button onClick={save}>Save</Button>
                 </section>
             </section>
         </main>
     );
 };
-
-// Appointment component should display the Show Component 
-// when there is an interview booked and default to the Empty componentn. 
