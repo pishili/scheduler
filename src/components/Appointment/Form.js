@@ -41,9 +41,11 @@ export default function Form(props) {
                         data-testid="student-name-input"
                     />
                 </form>
-                <InterviewerList interviewers={interviewers}
-                    value={interviewer}
-                    onChange={setInterviewer} />
+                <InterviewerList
+                    interviewers={interviewers}
+                    interviewer={interviewer}
+                    setInterviewer={setInterviewer}
+                />
             </section>
             <section className="appointment__card-right">
                 <section className="appointment__actions">
