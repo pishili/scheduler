@@ -55,3 +55,5 @@ export default function Form(props) {
     );
 };
 
+// Appointment component should display the Show Component 
+// when there is an interview booked and default to the Empty componentn. 
