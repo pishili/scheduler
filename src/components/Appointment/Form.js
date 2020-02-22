@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "components/Button";
+import Confirm from "components/Appointment/Confirm"
 import InterviewerList from "components/InterviewerList";
 
 export default function Form(props) {
@@ -49,8 +50,10 @@ export default function Form(props) {
             </section>
             <section className="appointment__card-right">
                 <section className="appointment__actions">
-                <Button onClick={cancel}>Cancel</Button>
-                <Button onClick={save}>Save</Button>
+                    <Button
+                        onClick={cancel} danger>Cancel</Button>
+                    <Button
+                        onClick={save} confirm>Save</Button>
                 </section>
             </section>
         </main>
