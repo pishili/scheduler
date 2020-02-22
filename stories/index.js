@@ -180,7 +180,7 @@ storiesOf("Appointment", module)
       onCancel={action("onCancel")}
     />)
   )
-  .add("Creat", () => (
+  .add("Create", () => (
     <Form
       name=""
       interviewers={interviewers}
