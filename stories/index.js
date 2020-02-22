@@ -162,7 +162,13 @@ storiesOf("Appointment", module)
       onEdit={action("onEdit")}
       onDeleted={action("onDelete")} />)
 
-  .add("Confirm", () => <Confirm message="Delete the appointment?" onConfirm={action("onConfirm")} onCancel={action("onCancel")} />)
+  .add("Confirm", () => (
+    <Confirm
+      message="Delete the appointment?"
+      onConfirm={action("onConfirm")}
+      onCancel={action("onCancel")}
+    />)
+  )
   .add("Status", () => <Status message="Deleting" />)
   .add("Error", () => <Error message="Could not delete appointment." onClose={action("onClose")} />)
   .add("Edit", () => (
@@ -183,9 +189,3 @@ storiesOf("Appointment", module)
       onCancel={action("onCancel")}
     />)
   )
-  .add("Appointment Empty", () => (
-    <Fragment>
-      <Appointment id={1} time="12pm" />
-      <Appointment id="last" time="1pm" />
-    </Fragment>
-  ))
