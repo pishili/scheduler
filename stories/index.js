@@ -4,6 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import "styles/index.scss";
+import "styles/styles.scss"
 import Button from "components/Button";
 
 // import day related libraries 
@@ -155,7 +156,12 @@ storiesOf("Appointment", module)
   .add("Appointment with Time", () => <Appointment time="12pm" />)
   .add("Header", () => <Header time="12pm" />)
   .add("Empty", () => <Empty onAdd={action("onAdd")} />)
-  .add("Show", () => <Show onEdit={action("onEdit")} onDeleted={action("onDelete")} />)
+  .add("Show", () => <Show
+      student="la"
+      interviewer={interviewers[0]}
+      onEdit={action("onEdit")}
+      onDeleted={action("onDelete")} />)
+
   .add("Confirm", () => <Confirm message="Delete the appointment?" onConfirm={action("onConfirm")} onCancel={action("onCancel")} />)
   .add("Status", () => <Status message="Deleting" />)
   .add("Error", () => <Error message="Could not delete appointment." onClose={action("onClose")} />)
@@ -166,7 +172,7 @@ storiesOf("Appointment", module)
       interviewer={2}
       onSave={action("  ")}
       onCancel={action("onCancel")}
-  />)
+    />)
   )
   .add("Creat", () => (
     <Form
