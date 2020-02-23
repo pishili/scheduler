@@ -2,7 +2,66 @@ import React, { useState } from "react";
 
 import "styles/Application.scss";
 
-import DayList from "components/DayList";
+import DayList from "components/Day/DayList";
+
+const appointments = [
+  {
+    id: 1,
+    time: "12pm",
+  },
+  {
+    id: 2,
+    time: "1pm",
+    interview: {
+      student: "Lydia Miller-Jones",
+      interviewer: {
+        id: 1,
+        name: "Sylvia Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  }
+
+  {
+    id: 3,
+    time: "6pm",
+    interview: {
+      student: "Jennifer Aniston",
+      interviewer: {
+        id: 1,
+        name: "Erik Nel",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  }
+
+  {
+    id: 4,
+    time: "11am",
+    interview: {
+      student: "Lynda Sabori",
+      interviewer: {
+        id: 1,
+        name: "Charles Hughes",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  }
+
+  {
+    id: 5,
+    time: "3pm",
+    interview: {
+      student: "Leonardo Ebrol",
+      interviewer: {
+        id: 1,
+        name: "Shams Yaroyi",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  }
+];
+
 
 const days = [
   {

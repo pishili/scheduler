@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "components/Button";
+import Button from "components/Button/Button";
 
 var classNames = require('classnames');
 
@@ -12,8 +12,8 @@ export default function Confirm(props) {
         <main className="appointment__card appointment__card--confirm">
             <h1 className="text--semi-bold">{message}</h1>
             <section className="appointment__actions">
-                <Button onClick={onCancel} danger>Cancel</Button>
-                <Button onClick={onConfirm} danger>Confirm</Button>
+                <Button onClick={onCancel} danger={true}>Cancel</Button>
+                <Button onClick={onConfirm} danger={true}>Confirm</Button>
             </section>
         </main>
 

@@ -5,15 +5,15 @@ import { action } from "@storybook/addon-actions";
 
 import "styles/index.scss";
 import "styles/styles.scss"
-import Button from "components/Button";
+import Button from "components/Button/Button";
 
 // import day related libraries 
-import DayListItem from "components/DayListItem";
-import DayList from "components/DayList";
+import DayListItem from "components/Day/DayListItem";
+import DayList from "components/Day/DayList";
 
 // import interview related libraries 
-import InterviewerListItem from "components/InterviewerListItem";
-import InterviewerList from "components/InterviewerList";
+import InterviewerListItem from "components/Interview/InterviewerListItem";
+import InterviewerList from "components/Interview/InterviewerList";
 
 import Appointment from "components/Appointment";
 
@@ -199,4 +199,23 @@ storiesOf("Appointment", module)
     <Appointment
       time = "12pm"
      />)
-    );
+    )
+    .add("Appointment Empty", () => (
+      <Fragment>
+        <Appointment id={1} time="12pm" />
+        <Appointment id="last" time="1pm" />
+      </Fragment>
+    ))
+    .add("Appointment Booked", () => (
+      <Fragment>
+        <Appointment
+          id={1}
+          time="12pm"
+          interview={{ student: "Lydia Miller-Jones", interviewer }}
+        />
+        <Appointment
+           id="last"
+           time="1pm"
+        />
+      </Fragment>
+    ));

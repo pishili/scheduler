@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Button from "components/Button";
+import Button from "components/Button/Button";
 import Confirm from "components/Appointment/Confirm"
-import InterviewerList from "components/InterviewerList";
+import InterviewerList from "components/Interview/InterviewerList";
 
 export default function Form(props) {
     const { interviewers, onCancel, onSave } = props;
@@ -27,7 +27,7 @@ export default function Form(props) {
         onSave(name, interviewer);
     }
 
-
+    
     return (
         <main className="appointment__card appointment__card--create">
             <section className="appointment__card-left">
@@ -51,9 +51,15 @@ export default function Form(props) {
             <section className="appointment__card-right">
                 <section className="appointment__actions">
                     <Button
-                        onClick={cancel} danger>Cancel</Button>
+                        onClick={cancel}
+                        danger={true}>
+                            Cancel
+                    </Button>
                     <Button
-                        onClick={save} confirm>Save</Button>
+                        onClick={save}
+                        confirm={true}>
+                            Save
+                    </Button>
                 </section>
             </section>
         </main>
