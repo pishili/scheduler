@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-import "styles/Application.scss";
+import "styles/Application.scss"
 
-import DayList from "components/Day/DayList";
+import DayList from "components/Day/DayList"
+import Appointment from "components/Appointment"
 
 const appointments = [
   {
@@ -20,8 +21,7 @@ const appointments = [
         avatar: "https://i.imgur.com/LpaY82x.png",
       }
     }
-  }
-
+  },
   {
     id: 3,
     time: "6pm",
@@ -33,8 +33,7 @@ const appointments = [
         avatar: "https://i.imgur.com/LpaY82x.png",
       }
     }
-  }
-
+  },
   {
     id: 4,
     time: "11am",
@@ -46,8 +45,7 @@ const appointments = [
         avatar: "https://i.imgur.com/LpaY82x.png",
       }
     }
-  }
-
+  },
   {
     id: 5,
     time: "3pm",
@@ -108,10 +106,19 @@ export default function Application(props) {
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        {appointments.map((a) => {
+          return (
+            <Appointment
+              time={a.time}
+              interview={a.interview}
+            />
+          )
+        })
+        }
       </section>
 
     </main>
   );
 }
+
 
