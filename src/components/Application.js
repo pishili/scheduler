@@ -109,8 +109,7 @@ export default function Application(props) {
         {appointments.map((a) => {
           return (
             <Appointment
-              time={a.time}
-              interview={a.interview}
+              {...a}
             />
           )
         })
