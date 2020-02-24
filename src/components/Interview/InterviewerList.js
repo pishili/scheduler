@@ -9,7 +9,7 @@ export default function InterviewerList(props) {
 
     const { interviewers, interviewer, setInterviewer } = props;
 
-    const interviewersElements = interviewers.map(thisInterviewer => {
+    const interviewersElements = Object.values(interviewers).map(thisInterviewer => {
         return (
           <InterviewerListItem
             key={thisInterviewer.id}

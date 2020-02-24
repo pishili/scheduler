@@ -80,7 +80,7 @@ export default function Application(props) {
           return (
             <Appointment
               key={a.id}
-              interviewers={Object.values(state.interviewers)}
+              interviewers={state.interviewers}
               {...a}
             />
           )
