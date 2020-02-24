@@ -10,12 +10,15 @@ import { getAppointmentsForDay } from "helpers/selectors"
 const axios = require('axios');
 
 export default function Application(props) {
-  const [day, setDay] = useState("Monday")
-  // Remove the days array and use useState to add a days state
-  // to the our Application component. It can be initialized as an empty array.
-  const [days, setDays] = useState([]);
-
-  const [appointments, setAppointments] = useState([]);
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: []
+  });
+  const setDay = (d) => setState({ ...state, day: d });
+  // TODO: why use prev => ...?
+  const setDays = (ds) => setState(prev => ({ ...prev, "days": ds }));
+  const setAppointments = (thisAppointments) => setState(prev => ({ ...prev, "appointments": thisAppointments }));
 
   useEffect(() => {
     axios.get("http://localhost:8001/api/days").then((response) => {
@@ -23,19 +26,18 @@ export default function Application(props) {
     });
   }, [])
 
-
   useEffect(() => {
     axios.get("http://localhost:8001/api/appointments").then((response) => {
       // console.log(Object.values(response.data));
       const appointments = getAppointmentsForDay(
         {
-          days: days,
+          days: state.days,
           appointments: response.data
         },
-        day);
-      setAppointments(appointments);
+        state.day);
+        setAppointments(appointments);
     });
-  }, [day])
+  }, [state.day])
 
 
   return (
@@ -49,8 +51,8 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-            days={days}
-            day={day}
+            days={state.days}
+            day={state.day}
             setDay={setDay}
           />
         </nav>
@@ -62,7 +64,7 @@ export default function Application(props) {
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
       <section className="schedule">
-        {appointments.map((a) => {
+        {state.appointments.map((a) => {
           return (
             <Appointment
               {...a}
