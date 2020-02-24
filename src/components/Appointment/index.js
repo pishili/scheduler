@@ -38,6 +38,7 @@ export default function Appointment(props) {
         />
       case CONFIRM:
         return <Confirm
+          message="Are you sure you want to delete this appointment?"
           onConfirm={() => transition(EMPTY)}
           onCancel={() => transition(SHOW)} />
       case CREATE:
