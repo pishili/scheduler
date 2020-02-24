@@ -15,6 +15,11 @@ export default function Show(props) {
                 <h2 className="text--regular">{student}</h2>
                 <section className="interviewer">
                     <h4 className="text--light">Interviewer</h4>
+                    <img
+                        className="interviewers__item-image"
+                        src={interviewer.avatar}
+                        alt={interviewer.name}
+                    />
                     <h3 className="text--regular">{interviewer.name}</h3>
                 </section>
             </section>

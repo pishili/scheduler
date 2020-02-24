@@ -32,7 +32,7 @@ export default function Appointment(props) {
       case SHOW:
         return <Show
           student={interview.student}
-          interviewer={interview.interviewer}
+          interviewer={interviewers[interview.interviewer]}
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         />
