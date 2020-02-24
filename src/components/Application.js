@@ -21,24 +21,29 @@ export default function Application(props) {
   const setAppointments = (thisAppointments) => setState(prev => ({ ...prev, "appointments": thisAppointments }));
 
   useEffect(() => {
-    axios.get("http://localhost:8001/api/days").then((response) => {
-      setDays(response.data);
-    });
-  }, [])
 
-  useEffect(() => {
-    axios.get("http://localhost:8001/api/appointments").then((response) => {
-      // console.log(Object.values(response.data));
+    const daysRequest = axios.get("http://localhost:8001/api/days")
+    const appointmentsRequest = axios.get("http://localhost:8001/api/appointments")
+
+    Promise.all([
+      Promise.resolve(daysRequest),
+      Promise.resolve(appointmentsRequest)
+    ]).then((all) => {
+      const [daysResponse, appointmentsResponse] = all
+
+      const days = daysResponse.data
       const appointments = getAppointmentsForDay(
         {
-          days: state.days,
-          appointments: response.data
+          days: daysResponse.data,
+          appointments: appointmentsResponse.data
         },
-        state.day);
-        setAppointments(appointments);
-    });
-  }, [state.day])
+        state.day
+      )
 
+      setState(prev => ({ ...prev, days, appointments }));
+    });
+
+  }, [state.day])
 
   return (
     <main className="layout">
