@@ -15,7 +15,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
   const setDay = (d) => setState({ ...state, day: d });
   // TODO: why use prev => ...?
@@ -26,16 +27,19 @@ export default function Application(props) {
 
     const daysRequest = axios.get("http://localhost:8001/api/days")
     const appointmentsRequest = axios.get("http://localhost:8001/api/appointments")
+    const interviewersRequest = axios.get("http://localhost:8001/api/interviewers")
 
     Promise.all([
       Promise.resolve(daysRequest),
-      Promise.resolve(appointmentsRequest)
+      Promise.resolve(appointmentsRequest),
+      Promise.resolve(interviewersRequest)
     ]).then((all) => {
-      const [daysResponse, appointmentsResponse] = all
+      const [daysResponse, appointmentsResponse, interviewersResponse] = all
 
       const days = daysResponse.data
       const appointments = appointmentsResponse.data
-      setState(prev => ({ ...prev, days, appointments }));
+      const interviewers = interviewersResponse.data
+      setState(prev => ({ ...prev, days, appointments, interviewers }));
     });
 
   }, [state.day])
@@ -76,6 +80,7 @@ export default function Application(props) {
           return (
             <Appointment
               key={a.id}
+              interviewers={Object.values(state.interviewers)}
               {...a}
             />
           )
