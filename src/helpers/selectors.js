@@ -4,8 +4,13 @@ export function getAppointmentsForDay(state, day) {
     const appointments = state.appointments;
     let appointmentObjects = [];
 
-    const appointmentIDs = days.filter((d) => d.name === day)[0].appointments
-    appointmentObjects = appointmentIDs.map((id) => appointments[id])
+    if(day !== undefined && days !== undefined && days.length > 0) {
+        const daysObjects = days.filter((d) => d.name === day)
+        if (daysObjects.length === 1) {
+            const appointmentIDs = daysObjects[0].appointments
+            appointmentObjects = appointmentIDs.map((id) => appointments[id])
+        }
+    }
     
     return appointmentObjects;
 }
