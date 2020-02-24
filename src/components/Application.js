@@ -13,7 +13,7 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: []
+    appointments: {}
   });
   const setDay = (d) => setState({ ...state, day: d });
   // TODO: why use prev => ...?
@@ -32,18 +32,19 @@ export default function Application(props) {
       const [daysResponse, appointmentsResponse] = all
 
       const days = daysResponse.data
-      const appointments = getAppointmentsForDay(
-        {
-          days: daysResponse.data,
-          appointments: appointmentsResponse.data
-        },
-        state.day
-      )
-
+      const appointments = appointmentsResponse.data
       setState(prev => ({ ...prev, days, appointments }));
     });
 
   }, [state.day])
+
+  const appointmentsForDay = getAppointmentsForDay(
+    {
+      days: state.days,
+      appointments: state.appointments
+    },
+    state.day
+  )
 
   return (
     <main className="layout">
@@ -69,15 +70,16 @@ export default function Application(props) {
         {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
       <section className="schedule">
-        {state.appointments.map((a) => {
+        {appointmentsForDay.map((a) => {
           return (
             <Appointment
+              key={a.id}
               {...a}
             />
           )
         })
         }
-        <Appointment key="last" time="5pm" />
+        <Appointment key="last" time="5pm" interview={null} />
       </section>
 
     </main>
