@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 export default function Empty(props) {
 
-    const { onAdd // Function
+    const {
+        onAdd // Function
     } = props;
 
     return (

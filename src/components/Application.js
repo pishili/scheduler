@@ -9,6 +9,8 @@ import { getAppointmentsForDay } from "helpers/selectors"
 
 const axios = require('axios');
 
+
+
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
