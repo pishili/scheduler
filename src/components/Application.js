@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react"
-
+import React, { useState, useEffect, Component } from "react"
 
 import "styles/Application.scss"
 
 import DayList from "components/Day/DayList"
 import Appointment from "components/Appointment"
 import { getAppointmentsForDay } from "helpers/selectors"
+import { getInterviewersForDay } from "helpers/selectors"
 
 const axios = require('axios');
-
-
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -18,17 +16,19 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   });
+
+
   const setDay = (d) => setState({ ...state, day: d });
   // TODO: why use prev => ...?
   const setDays = (ds) => setState(prev => ({ ...prev, "days": ds }));
   const setAppointments = (thisAppointments) => setState(prev => ({ ...prev, "appointments": thisAppointments }));
+  const setInterviewers = (thisInterviewers) => setState(prev => ({ ...prev, "interviewers": thisInterviewers }));
 
   useEffect(() => {
-
-    const daysRequest = axios.get("http://localhost:8001/api/days")
+    const daysRequest = axios.get("http://localhost:8001/api/days");
     const appointmentsRequest = axios.get("http://localhost:8001/api/appointments")
     const interviewersRequest = axios.get("http://localhost:8001/api/interviewers")
-
+    
     Promise.all([
       Promise.resolve(daysRequest),
       Promise.resolve(appointmentsRequest),
@@ -45,12 +45,45 @@ export default function Application(props) {
   }, [state.day])
 
   const appointmentsForDay = getAppointmentsForDay(
-    {
-      days: state.days,
-      appointments: state.appointments
-    },
+    state,
     state.day
   )
+
+  const interviewersForDay = getInterviewersForDay(
+    state,
+    state.day
+  )
+  console.log(interviewersForDay)
+
+  const bookInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    // setAppointments(appointments)
+    const url = `http://localhost:8001/api/appointments/${id}`;
+    return axios.put(url, appointment)
+      .then(response => {
+        setState({
+          ...state,
+          appointments
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+
+
+
+
 
   return (
     <main className="layout">
@@ -80,7 +113,8 @@ export default function Application(props) {
           return (
             <Appointment
               key={a.id}
-              interviewers={state.interviewers}
+              interviewers={interviewersForDay}
+              bookInterview={bookInterview}
               {...a}
             />
           )
