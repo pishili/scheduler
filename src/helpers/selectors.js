@@ -14,3 +14,34 @@ export function getAppointmentsForDay(state, day) {
     
     return appointmentObjects;
 }
+
+
+export function getInterviewersForDay(state, day) {
+    // getting all the appointments belong to that specific day
+    const appointmentObjects = getAppointmentsForDay(state, day);
+    
+    const interviewers = Object.values(state.interviewers);
+    const interviewersObjects = [];
+    const interviewerIDs = [];
+
+    // getting the interviewerIDs of specific day
+    for (let appointmentObj of appointmentObjects) {
+        if (appointmentObj["interview"] !== null) {
+            const interviewerID = appointmentObj["interview"]["interviewer"];
+            interviewerIDs.push(interviewerID);
+        }
+    }
+
+    // getting the interviewers of specific day
+    for (let interviewer of interviewers) {
+        for (let id of interviewerIDs) {
+            if (interviewer["id"] === id) {
+                interviewersObjects.push(interviewer);
+            }
+        }
+    }
+
+    console.log(interviewersObjects)
+    
+    return interviewersObjects;
+}
