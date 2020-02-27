@@ -20,9 +20,30 @@ export default function Application(props) {
 
   const setDay = (d) => setState({ ...state, day: d });
   // TODO: why use prev => ...?
-  const setDays = (ds) => setState(prev => ({ ...prev, "days": ds }));
-  const setAppointments = (thisAppointments) => setState(prev => ({ ...prev, "appointments": thisAppointments }));
-  const setInterviewers = (thisInterviewers) => setState(prev => ({ ...prev, "interviewers": thisInterviewers }));
+  const incrSpots = () => setState(prev => {
+    const newDays = state.days
+    for (let i = 0; i < newDays.length; i++) {
+      if (newDays[i]["name"] === state.day) {
+        newDays[i]["spots"] = newDays[i]["spots"] + 1;
+      }
+    }
+    // newDays[state.day]["spots"] = newDays[state.day]["spots"] + 1
+    // updates
+    return { ...prev,  "days": newDays }
+  });
+
+  const decrSpots = () => setState(prev => {
+    const newDays = state.days
+    for (let i = 0; i < newDays.length; i++) {
+      if (newDays[i]["name"] === state.day) {
+        newDays[i]["spots"] = newDays[i]["spots"] - 1;
+      }
+    }
+    // newDays[state.day]["spots"] = newDays[state.day]["spots"] + 1
+    // updates
+    return { ...prev,  "days": newDays }
+  });
+
 
   useEffect(() => {
     const daysRequest = axios.get("http://localhost:8001/api/days");
@@ -131,6 +152,8 @@ export default function Application(props) {
               interviewers={interviewersForDay}
               bookInterview={bookInterview}
               cancelInterview={cancelInterview}
+              incrSpots={incrSpots}
+              decrSpots={decrSpots}
               {...a}
             />
           )

@@ -25,7 +25,7 @@ const ERROR_CREATE = "ERROR_CREATE"
 
 
 export default function Appointment(props) {
-  const { id, time, interview, interviewers } = props;
+  const { id, time, interview, interviewers, incrSpots, decrSpots } = props;
 
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
@@ -35,6 +35,7 @@ export default function Appointment(props) {
     transition(DELETING);
     props.cancelInterview(id)
       .then(() => transition(EMPTY))
+      .then(incrSpots)
       .catch(error => {
         transition(ERROR_DELETE)
       })
@@ -63,6 +64,7 @@ export default function Appointment(props) {
     transition(SAVING);
     props.bookInterview(id, interview)
       .then(() => transition(SHOW))
+      .then(decrSpots)
       .catch(error => {
         transition(ERROR_CREATE)
       })
