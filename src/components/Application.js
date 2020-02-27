@@ -75,9 +75,6 @@ export default function Application(props) {
           appointments
         });
       })
-      .catch(error => {
-        console.log(error);
-      });
   }
 
   const cancelInterview = (id) => {

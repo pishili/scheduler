@@ -19,6 +19,9 @@ const EDIT = "EDIT"
 const DELETING = "DELETING"
 const SAVING = "SAVING"
 const ERROR_DELETE = "ERROR_DELETE"
+const ERROR_EDIT = "ERROR_EDIT"
+const ERROR_CREATE = "ERROR_CREATE"
+
 
 
 export default function Appointment(props) {
@@ -37,9 +40,7 @@ export default function Appointment(props) {
       })
   };
 
-  // we pass this function to the Form component. 
-  // The Form 
-  const save = (name, interviewer) => { 
+  const saveEdit = (name, interviewer) => { 
     const interview = {
       student: name,
       interviewer
@@ -48,7 +49,23 @@ export default function Appointment(props) {
     transition(SAVING);
     props.bookInterview(id, interview)
       .then(() => transition(SHOW))
-    ;
+      .catch(error => {
+        transition(ERROR_EDIT)
+      })
+  }
+
+
+  const saveCreate = (name, interviewer) => { 
+    const interview = {
+      student: name,
+      interviewer
+    };
+    transition(SAVING);
+    props.bookInterview(id, interview)
+      .then(() => transition(SHOW))
+      .catch(error => {
+        transition(ERROR_CREATE)
+      })
   }
 
   const modeRenderer = (thisMode) => {
@@ -75,7 +92,7 @@ export default function Appointment(props) {
           interviewers={interviewers}
           interviewer={null}
           onCancel={() => transition(EMPTY)}
-          onSave={save}
+          onSave={saveCreate}
         />
       case EDIT:
         return <Form
@@ -83,7 +100,7 @@ export default function Appointment(props) {
           interviewers={interviewers}
           interviewer={interview.interviewer}
           onCancel={() => transition(SHOW)}
-          onSave={save}
+          onSave={saveEdit}
         />
         case SAVING:
           return <Status
@@ -98,6 +115,16 @@ export default function Appointment(props) {
             message="Could not delete"
             onClose={() => transition(SHOW)}
           />
+        case ERROR_EDIT:
+          return <Error
+            message="Could not save"
+            onClose={() => transition(SHOW)}
+          />
+        case ERROR_CREATE:
+          return <Error
+            message="Could not save"
+            onClose={() => transition(EMPTY)}
+          />  
       default:
         return <Empty />
     }
