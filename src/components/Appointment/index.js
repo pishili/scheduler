@@ -6,6 +6,7 @@ import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
 import Confirm from "components/Appointment/Confirm";
 import Form from "components/Appointment/Form";
+import Error from "components/Appointment/Error"
 
 import useVisualMode from "hooks/useVisualMode";
 import Status from "./Status";
@@ -17,6 +18,7 @@ const CREATE = "CREATE"
 const EDIT = "EDIT"
 const DELETING = "DELETING"
 const SAVING = "SAVING"
+const ERROR_DELETE = "ERROR_DELETE"
 
 
 export default function Appointment(props) {
@@ -30,7 +32,9 @@ export default function Appointment(props) {
     transition(DELETING);
     props.cancelInterview(id)
       .then(() => transition(EMPTY))
-      ;
+      .catch(error => {
+        transition(ERROR_DELETE)
+      })
   };
 
   // we pass this function to the Form component. 
@@ -88,6 +92,11 @@ export default function Appointment(props) {
         case DELETING:
           return <Status
             message="DELETING"
+          />
+        case ERROR_DELETE:
+          return <Error
+            message="Could not delete"
+            onClose={() => transition(SHOW)}
           />
       default:
         return <Empty />
