@@ -26,23 +26,12 @@ export default function Appointment(props) {
     interview ? SHOW : EMPTY
   )
 
-
-  const editInterview = (name, interviewer) => {
-    transition(SHOW);
-    // TODOs:
-    // writing the save function
-    // transition to SHOW
-  }
-
-  const deleteInterview = (name, interviewer) => {
+  const cancelInterview = () => {
     transition(DELETING);
-    // TODOs:
-    // writing the save function
-    // transition to SHOW
-    transition(EMPTY);
-  }
-
-  
+    props.cancelInterview(id)
+      .then(() => transition(EMPTY))
+      ;
+  };
 
   // we pass this function to the Form component. 
   // The Form 
@@ -74,7 +63,7 @@ export default function Appointment(props) {
       case CONFIRM:
         return <Confirm
           message="Are you sure you want to delete this appointment?"
-          onConfirm={() => transition(EMPTY)}
+          onConfirm={cancelInterview}
           onCancel={() => transition(SHOW)} />
       case CREATE:
         return <Form
@@ -95,6 +84,10 @@ export default function Appointment(props) {
         case SAVING:
           return <Status
             message="SAVING"
+          />
+        case DELETING:
+          return <Status
+            message="DELETING"
           />
       default:
         return <Empty />

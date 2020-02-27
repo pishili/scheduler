@@ -80,9 +80,30 @@ export default function Application(props) {
       });
   }
 
+  const cancelInterview = (id) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
 
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
 
-
+    // setAppointments(appointments)
+    const url = `http://localhost:8001/api/appointments/${id}`;
+    return axios.delete(url)
+      .then(response => {
+        setState({
+          ...state,
+          appointments
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
 
   return (
@@ -115,6 +136,7 @@ export default function Application(props) {
               key={a.id}
               interviewers={interviewersForDay}
               bookInterview={bookInterview}
+              cancelInterview={cancelInterview}
               {...a}
             />
           )
