@@ -74,7 +74,6 @@ export default function Application(props) {
     state,
     state.day
   )
-  console.log(interviewersForDay)
 
   const bookInterview = (id, interview) => {
     const appointment = {

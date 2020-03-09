@@ -35,7 +35,7 @@ export default function Appointment(props) {
     transition(DELETING);
     props.cancelInterview(id)
       .then(() => transition(EMPTY))
-      .then(incrSpots)
+      .then(() => incrSpots())
       .catch(error => {
         transition(ERROR_DELETE)
       })
@@ -46,15 +46,15 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    console.log(interview);
     transition(SAVING);
     props.bookInterview(id, interview)
       .then(() => transition(SHOW))
+      .then(decrSpots)
       .catch(error => {
         transition(ERROR_EDIT)
       })
   }
-
+  
 
   const saveCreate = (name, interviewer) => { 
     const interview = {
@@ -64,7 +64,6 @@ export default function Appointment(props) {
     transition(SAVING);
     props.bookInterview(id, interview)
       .then(() => transition(SHOW))
-      .then(decrSpots)
       .catch(error => {
         transition(ERROR_CREATE)
       })
