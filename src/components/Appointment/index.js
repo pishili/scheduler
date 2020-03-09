@@ -41,39 +41,47 @@ export default function Appointment(props) {
       })
   };
 
-  const saveEdit = (name, interviewer) => { 
+  const saveEdit = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer
     };
-    transition(SAVING);
-    props.bookInterview(id, interview)
-      .then(() => transition(SHOW))
-      .then(decrSpots)
-      .catch(error => {
-        transition(ERROR_EDIT)
-      })
+    if (name === "" || interviewer === "") {
+      transition(ERROR_EDIT);
+    } else {
+      transition(SAVING);
+      props.bookInterview(id, interview)
+        .then(() => transition(SHOW))
+        .then(decrSpots)
+        .catch(error => {
+          transition(ERROR_EDIT)
+        })
+    }
   }
-  
 
-  const saveCreate = (name, interviewer) => { 
+  const saveCreate = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer
     };
-    transition(SAVING);
-    props.bookInterview(id, interview)
-      .then(() => transition(SHOW))
-      .catch(error => {
-        transition(ERROR_CREATE)
-      })
+
+    if (name === "" || interviewer === "") {
+      transition(ERROR_CREATE);
+    } else {
+      transition(SAVING);
+      props.bookInterview(id, interview)
+        .then(() => transition(SHOW))
+        .catch(error => {
+          transition(ERROR_CREATE)
+        })
+    }
   }
 
   const modeRenderer = (thisMode) => {
     switch (thisMode) {
       case EMPTY:
         return <Empty
-        onAdd={() => transition(CREATE)}
+          onAdd={() => transition(CREATE)}
         />
       case SHOW:
         return <Show
@@ -103,29 +111,29 @@ export default function Appointment(props) {
           onCancel={() => transition(SHOW)}
           onSave={saveEdit}
         />
-        case SAVING:
-          return <Status
-            message="SAVING"
-          />
-        case DELETING:
-          return <Status
-            message="DELETING"
-          />
-        case ERROR_DELETE:
-          return <Error
-            message="Could not delete"
-            onClose={() => transition(SHOW)}
-          />
-        case ERROR_EDIT:
-          return <Error
-            message="Could not save"
-            onClose={() => transition(SHOW)}
-          />
-        case ERROR_CREATE:
-          return <Error
-            message="Could not save"
-            onClose={() => transition(EMPTY)}
-          />  
+      case SAVING:
+        return <Status
+          message="SAVING"
+        />
+      case DELETING:
+        return <Status
+          message="DELETING"
+        />
+      case ERROR_DELETE:
+        return <Error
+          message="Could not delete"
+          onClose={() => transition(SHOW)}
+        />
+      case ERROR_EDIT:
+        return <Error
+          message="Could not save"
+          onClose={() => transition(SHOW)}
+        />
+      case ERROR_CREATE:
+        return <Error
+          message="Could not save"
+          onClose={() => transition(EMPTY)}
+        />
       default:
         return <Empty />
     }
@@ -136,7 +144,7 @@ export default function Appointment(props) {
     <article className="appointment">
       <Header time={time} />
 
-      { modeRenderer(mode) }
+      {modeRenderer(mode)}
 
     </article>
   );
