@@ -4,7 +4,9 @@ export function getAppointmentsForDay(state, day) {
     const appointments = state.appointments;
     let appointmentObjects = [];
 
-    if (day !== undefined && days !== undefined && days.length > 0) {
+    if (day
+        && days
+        && days.length > 0) {
         const daysObjects = days.filter((d) => d.name === day)
         if (daysObjects.length === 1) {
             const appointmentIDs = daysObjects[0].appointments
@@ -19,7 +21,10 @@ export function getAppointmentsForDay(state, day) {
 export function getInterviewersForDay(state, day) {
     const interviewersObjects = {};
 
-    if (day !== undefined && state.days !== undefined && state.days.length > 0) {
+    // days can be an empty list
+    if (day
+        && state.days
+        && state.days.length > 0) {
 
         let filteredDays = state.days.filter((d) => d.name === day)
         if (filteredDays.length > 0) {
