@@ -22,8 +22,6 @@ const ERROR_DELETE = "ERROR_DELETE"
 const ERROR_EDIT = "ERROR_EDIT"
 const ERROR_CREATE = "ERROR_CREATE"
 
-
-
 export default function Appointment(props) {
   const { id, time, interview, interviewers, incrSpots, decrSpots } = props;
 
@@ -138,7 +136,6 @@ export default function Appointment(props) {
         return <Empty />
     }
   }
-
 
   return (
     <article className="appointment">
