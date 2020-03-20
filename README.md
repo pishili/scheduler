@@ -23,9 +23,13 @@ npm test
 ```sh
 npm run storybook
 ```
-
 ## Reset the database after applying new changes
 
 ```sh
 curl http://localhost:8001/api/debug/reset
 ```
+
+## Features
+- The intial view of the application:
+[Initial View]: '../images/1.png'
+
