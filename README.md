@@ -31,9 +31,8 @@ curl http://localhost:8001/api/debug/reset
 
 ## Features
 - The intial view of the application:
+![Initial]https://github.com/pishili/scheduler/tree/master/images/1.png
 
-
-Inline-style: 
-![alt text](https://github.com/pishili/scheduler/tree/master/images/1.png")
+![After Creating Appointment]: https://github.com/pishili/scheduler/tree/master/images/2.png
 
 
