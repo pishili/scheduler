@@ -61,7 +61,8 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    console.log(name,interviewer)
+    // console.log(`name: ${name}`)
+    // console.log(`interviewer: ${interviewer}`)
     if (name === "" || interviewer === null) {
       transition(ERROR_CREATE);
     } else {
