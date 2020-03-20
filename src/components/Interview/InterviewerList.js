@@ -3,8 +3,6 @@ import "styles/InterviewerList.scss";
 
 import InterviewerListItem from "components/Interview/InterviewerListItem";
 
-var classNames = require('classnames');
-
 export default function InterviewerList(props) {
 
     const { interviewers, interviewer, setInterviewer } = props;

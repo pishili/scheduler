@@ -1,6 +1,5 @@
 import React from "react";
 import "styles/InterviewerListItem.scss";
-import { storiesOf } from "@storybook/react";
 
 var classNames = require('classnames');
 

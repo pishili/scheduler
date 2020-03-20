@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import DayListItem from "components/Day/DayListItem";
 
 export default function DayList(props) {

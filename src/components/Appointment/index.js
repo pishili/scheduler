@@ -1,4 +1,4 @@
-import React, { setState } from "react";
+import React from "react";
 import "./styles.scss";
 
 import Header from "components/Appointment/Header";
@@ -25,7 +25,7 @@ const ERROR_CREATE = "ERROR_CREATE"
 export default function Appointment(props) {
   const { id, time, interview, interviewers, incrSpots, decrSpots } = props;
 
-  const { mode, transition, back } = useVisualMode(
+  const { mode, transition } = useVisualMode(
     interview ? SHOW : EMPTY
   )
 

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "components/Button/Button";
-import Confirm from "components/Appointment/Confirm"
 import InterviewerList from "components/Interview/InterviewerList";
 
 export default function Form(props) {
