@@ -44,13 +44,13 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    if (name === "" || interviewer === "") {
+    if (name === "" || interviewer.name === null || interviewer.avatar === null) {
       transition(ERROR_EDIT);
     } else {
       transition(SAVING);
       props.bookInterview(id, interview)
         .then(() => transition(SHOW))
-        .then(decrSpots)
+        // .then(decrSpots)
         .catch(error => {
           transition(ERROR_EDIT)
         })
@@ -62,8 +62,8 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-
-    if (name === "" || interviewer === "") {
+    console.log(name,interviewer)
+    if (name === "" || interviewer === null) {
       transition(ERROR_CREATE);
     } else {
       transition(SAVING);
