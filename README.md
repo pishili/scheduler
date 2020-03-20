@@ -1,4 +1,6 @@
 # Interview Scheduler
+Interview Scheduler is a React application for creating, editing and deleting appointments for interviews with specific interviewers for a given day.
+
 
 ## Setup
 
@@ -20,4 +22,10 @@ npm test
 
 ```sh
 npm run storybook
+```
+
+## Reset the database after applying new changes
+
+```sh
+curl http://localhost:8001/api/debug/reset
 ```
