@@ -69,6 +69,7 @@ export default function Appointment(props) {
       transition(SAVING);
       props.bookInterview(id, interview)
         .then(() => transition(SHOW))
+        .then(decrSpots)
         .catch(error => {
           transition(ERROR_CREATE)
         })
